@@ -21,11 +21,11 @@
   <table class="table table-bordered">
     <thead class="table-light">
       <tr>
-        <th>xi</th>
-        <th>fi</th>
-        <th>xi * fi</th>
-        <th>xi^2</th>
-        <th>xi^2 * fi</th>
+        <th>x<sub>i</sub></th>
+        <th>f<sub>i</sub></th>
+        <th>x<sub>i</sub> &#8226 f<sub>i</sub></th>
+        <th>x<sub>i</sub><sup>2</sup></th>
+        <th>x<sub>i</sub><sup>2</sup> &#8226 f<sub>i</sub></th>
       </tr>
     </thead>
     <tbody id="table-body">
@@ -127,7 +127,7 @@
   </table>
 </div>
 <div>
-    <table class="table table-bordered">
+    <table class="table table-bordered w-75 m-auto">
         <tr class="table-light">
             <td class="table-result" id="pis">
                 PIS:
@@ -145,6 +145,11 @@
 </div>
 
 <script>
+
+  function round(value){
+    return Math.round(value*100)/100
+  }
+
   function calculate() {
   let totalXi = 0;
   let totalFi = 0;
@@ -162,9 +167,9 @@
     const xiSquareFi = xiSquare * fi;
 
     // Actualiza los resultados en la tabla
-    document.getElementById(`xi-fi-${i}`).innerText = xiFi.toFixed(2);
-    document.getElementById(`xi-square-${i}`).innerText = xiSquare.toFixed(2);
-    document.getElementById(`xi-square-fi-${i}`).innerText = xiSquareFi.toFixed(2);
+    document.getElementById(`xi-fi-${i}`).innerText = round(xiFi);
+    document.getElementById(`xi-square-${i}`).innerText = round(xiSquare);
+    document.getElementById(`xi-square-fi-${i}`).innerText = round(xiSquareFi);
 
     // Acumula los totales
     totalXi += xi;
@@ -175,19 +180,20 @@
   }
 
   // Actualiza los totales en la última fila
-  document.getElementById('total-xi').innerText = "Total:\t" + totalXi.toFixed(2);
-  document.getElementById('total-fi').innerText = totalFi.toFixed(2);
-  document.getElementById('total-xi-fi').innerText = totalXiFi.toFixed(2);
-  document.getElementById('total-xi-square').innerText = totalXiSquare.toFixed(2);
-  document.getElementById('total-xi-square-fi').innerText = totalXiSquareFi.toFixed(2);
-  pis =  (totalXiFi.toFixed(2)/totalFi).toFixed(2);
-  ec = (pis - totalFi).toFixed(2)
-  ud = Math.sqrt((totalXiSquareFi/totalFi)- (pis*pis)).toFixed(2)
+  document.getElementById('total-xi').innerText = "Total:\t" + totalXi;
+  document.getElementById('total-fi').innerText = totalFi;
+  document.getElementById('total-xi-fi').innerText = totalXiFi;
+  document.getElementById('total-xi-square').innerText = totalXiSquare;
+  document.getElementById('total-xi-square-fi').innerText = totalXiSquareFi;
+  pis =  round(totalXiFi/totalFi);
+  ec = round(pis - totalFi)
+  ud = round(Math.sqrt((totalXiSquareFi/totalFi)- (pis*pis)))
 
   document.getElementById('pis').innerText = "PIS:\t" + pis
   document.getElementById('ec').innerText = "EC:\t" + ec
   document.getElementById('ud').innerText = "UD:\t" + ud
 }
+
 
 </script>
 

@@ -135,6 +135,9 @@
             <td class="table-result" id="ec">
                 EC:
             </td>
+            <td class="table-result" id="ud">
+              UD:
+          </td>
         </tr>
     </table>
 
@@ -177,10 +180,13 @@
   document.getElementById('total-xi-fi').innerText = totalXiFi.toFixed(2);
   document.getElementById('total-xi-square').innerText = totalXiSquare.toFixed(2);
   document.getElementById('total-xi-square-fi').innerText = totalXiSquareFi.toFixed(2);
-  
-  document.getElementById('pis').innerText = "PIS:\t" + (totalXiFi.toFixed(2)/totalFi).toFixed(2)
-  document.getElementById('ec').innerText = "EC:\t" + ((totalXiFi.toFixed(2)/totalFi).toFixed(2) - totalFi).toFixed(2)
-  
+  pis =  (totalXiFi.toFixed(2)/totalFi).toFixed(2);
+  ec = (pis - totalFi).toFixed(2)
+  ud = Math.sqrt((totalXiSquareFi/totalFi)- (pis*pis)).toFixed(2)
+
+  document.getElementById('pis').innerText = "PIS:\t" + pis
+  document.getElementById('ec').innerText = "EC:\t" + ec
+  document.getElementById('ud').innerText = "UD:\t" + ud
 }
 
 </script>
